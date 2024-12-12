@@ -15,33 +15,16 @@ public class Day01 : BaseDay
 
     public int SolvePartOne()
     {
-        List<int> list1 = new List<int>();
-        List<int> list2 = new List<int>();
-        foreach (var line in input.Split("\n").Where(x => x.Length > 0))
-        {
-            list1.Add(Int32.Parse(line.Split("   ")[0]));
-            list2.Add(Int32.Parse(line.Split("   ")[1]));
-        }
-        list1 = list1.Order().ToList();
-        list2 = list2.Order().ToList();
+        List<int> list1 = input.Split("\n").Where(x => x.Length > 0).Select(line => Int32.Parse(line.Split("   ")[0])).Order().ToList();
+        List<int> list2 = input.Split("\n").Where(x => x.Length > 0).Select(line => Int32.Parse(line.Split("   ")[1])).Order().ToList();
 
-        int sum = 0;
-        for(int i = 0; i < list1.Count(); i++)
-        {
-            sum += Math.Abs(list1[i] - list2[i]);
-        }
-        return sum;
+        return list1.Select((num, index) => Math.Abs(num - list2[index])).Sum();
     }
 
     public int SolvePartTwo()
     {
-        List<int> list1 = new List<int>();
-        List<int> list2 = new List<int>();
-        foreach (var line in input.Split("\n").Where(x => x.Length > 0))
-        {
-            list1.Add(Int32.Parse(line.Split("   ")[0]));
-            list2.Add(Int32.Parse(line.Split("   ")[1]));
-        }
+        List<int> list1 = input.Split("\n").Where(x => x.Length > 0).Select(line => Int32.Parse(line.Split("   ")[0])).ToList();
+        List<int> list2 = input.Split("\n").Where(x => x.Length > 0).Select(line => Int32.Parse(line.Split("   ")[1])).ToList();
 
         return list1.Select(num => list2.Where(x => x.Equals(num)).Count() * num).Sum();
     }

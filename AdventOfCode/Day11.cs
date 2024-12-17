@@ -14,14 +14,14 @@ public class Day11 : BaseDay
 
     public override ValueTask<string> Solve_1() => new($"{SolvePartOne()}");
 
-    public override ValueTask<string> Solve_2() => new($"{0}");
+    public override ValueTask<string> Solve_2() => new($"{SolvePartTwo()}");
 
     public int SolvePartOne()
     {
         count = 0;
         foreach (var num in input)
         {
-            eval(num, 30);
+            eval(num, 25);
             count++;
         }
         return count;
